@@ -5,17 +5,17 @@
 
 <img src="/diagrams/sequence.png" width="700">
 
-### Activity diagrams
+### Диаграммы активности
 
-#### Obtaining the list of emails
+#### Получение списка электронных писем
 
 <img src="/diagrams/list_emails_activity.png" width="400">
 
-#### Extracting the observables and creating the case
+#### Извлечение наблюдаемых объектов и создание случая
 
 <img src="/diagrams/case_from_email_activity.png" width="700">
 
-#### Performing the analysis and obtaining the verdict
+#### Проведение анализа и вынесение вердикта
 
 <img src="/diagrams/run_analysis_activity.png" width="700">
 
