@@ -40,31 +40,31 @@ deffileChecker():
 defmsgGrabber(file):
 
     try:
-        print(Fore.CYAN + "[+] Имяфайла: " + file + "\n")
+        print(Fore.CYAN + "[+] РРјСЏС„Р°Р№Р»Р°: " + file + "\n")
         withextract_msg.openMsg(file) asmessageFile:
-            print(Fore.GREEN + "[+] От: " + Fore.RESET + str(messageFile.sender))
-            print(Fore.GREEN + "[+] К: " + Fore.RESET + str(messageFile.to))
-            print(Fore.GREEN + "[+] Предмет: " + Fore.RESET  + str(messageFile.subject))
+            print(Fore.GREEN + "[+] РћС‚: " + Fore.RESET + str(messageFile.sender))
+            print(Fore.GREEN + "[+] Рљ: " + Fore.RESET + str(messageFile.to))
+            print(Fore.GREEN + "[+] РџСЂРµРґРјРµС‚: " + Fore.RESET  + str(messageFile.subject))
             print(Fore.GREEN + "[+] CC: " + Fore.RESET  + str(messageFile.cc))
             print(Fore.GREEN + "[+] BCC: " + Fore.RESET  + str(messageFile.bcc))
-            print(Fore.GREEN + "[+] Времяэлектроннойпочты: " + Fore.RESET  + str(messageFile.receivedTime))
+            print(Fore.GREEN + "[+] Р’СЂРµРјСЏСЌР»РµРєС‚СЂРѕРЅРЅРѕР№РїРѕС‡С‚С‹: " + Fore.RESET  + str(messageFile.receivedTime))
             iflen(messageFile.attachments) >0:
-                print(Fore.GREEN + "[+] Найденовложение – сохранениевовложениях!\n\n")
+                print(Fore.GREEN + "[+] РќР°Р№РґРµРЅРѕРІР»РѕР¶РµРЅРёРµ вЂ“ СЃРѕС…СЂР°РЅРµРЅРёРµРІРѕРІР»РѕР¶РµРЅРёСЏС…!\n\n")
                 forattachmentinmessageFile.attachments:
                      attachmentName = attachment.getFilename()
                      print(Fore.CYAN + attachmentName + "\n")
                      attachment.save(customPath= exportedPath)
             else:
-                print(Fore.GREEN + "[+] Вложений не наблюдается")
+                print(Fore.GREEN + "[+] Р’Р»РѕР¶РµРЅРёР№ РЅРµ РЅР°Р±Р»СЋРґР°РµС‚СЃСЏ")
             messageBody = str(messageFile.body)
             trucatedBody = messageBody.replace('\r', ' ')
-            print(Fore.GREEN + "[+] Электроннаяпочта\n\n" + Fore.YELLOW + trucatedBody)
+            print(Fore.GREEN + "[+] Р­Р»РµРєС‚СЂРѕРЅРЅР°СЏРїРѕС‡С‚Р°\n\n" + Fore.YELLOW + trucatedBody)
             msgIPGrabber(trucatedBody)
             msgEmailGrabber(trucatedBody)
             msgURLGrabber(trucatedBody)
             messageFile.close()
     except:
-        print("Что-топошлонетаквmsgGrabber!")
+        print("Р§С‚Рѕ-С‚РѕРїРѕС€Р»РѕРЅРµС‚Р°РєРІmsgGrabber!")
 
 defmsgIPGrabber(bodyWell):
 
@@ -78,9 +78,9 @@ defmsgIPGrabber(bodyWell):
                     ifmatchnotinIP:
                         IP.append(match)
                         IP_COUNT += 1
-                        print("\n" + str(IP_COUNT) + Fore.Green + " - Айпиадрес: " + match)
+                        print("\n" + str(IP_COUNT) + Fore.Green + " - РђР№РїРёР°РґСЂРµСЃ: " + match)
         except:
-            print("Что-то пошло не так при захвате IP-адресов MSG")
+            print("Р§С‚Рѕ-С‚Рѕ РїРѕС€Р»Рѕ РЅРµ С‚Р°Рє РїСЂРё Р·Р°С…РІР°С‚Рµ IP-Р°РґСЂРµСЃРѕРІ MSG")
 
 defmsgEmailGrabber(emailBody):
         
@@ -89,19 +89,19 @@ defmsgEmailGrabber(emailBody):
         
         try:
             ifregexisnotNone:
-                print(Fore.GREEN + "[+] Электронные письма, наблюдаемые в теле письма\n")
+                print(Fore.GREEN + "[+] Р­Р»РµРєС‚СЂРѕРЅРЅС‹Рµ РїРёСЃСЊРјР°, РЅР°Р±Р»СЋРґР°РµРјС‹Рµ РІ С‚РµР»Рµ РїРёСЃСЊРјР°\n")
                 formatchinregex:
                     ifmatchnotinEMAIL:
                         EMAIL.append(match)
                         print(match)
             print("\n")
         except:
-            print("Что-то идет не так при захвате электронных писем MSG")
+            print("Р§С‚Рѕ-С‚Рѕ РёРґРµС‚ РЅРµ С‚Р°Рє РїСЂРё Р·Р°С…РІР°С‚Рµ СЌР»РµРєС‚СЂРѕРЅРЅС‹С… РїРёСЃРµРј MSG")
 
 defmsgURLGrabber(urlFile):
 
         try:
-            print(Fore.GREEN + "[+] Наблюдаемые URL\n\n") 
+            print(Fore.GREEN + "[+] РќР°Р±Р»СЋРґР°РµРјС‹Рµ URL\n\n") 
             URL = [] 
             regex = re.findall(r'(?:[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?\.)+[a-z0-9][a-z0-9-]{0,61}[a-z0-9]',urlFile)
             ifregexisnotNone:
@@ -112,30 +112,30 @@ defmsgURLGrabber(urlFile):
                     urlFound = re.sub("<", "", urlFound)
                     print(urlFound.strip())
         except:
-            print("Что-то идет не так в URL-адресе MSG")
+            print("Р§С‚Рѕ-С‚Рѕ РёРґРµС‚ РЅРµ С‚Р°Рє РІ URL-Р°РґСЂРµСЃРµ MSG")
 
 defbaseGrabber():
 
   try: 
     print(Fore.BLUE + "-"*50)
-    print(Fore.BLUE + "Думаю что данные элементы очень подозрительны, о которых вам следует позаботиться!")
+    print(Fore.BLUE + "Р”СѓРјР°СЋ С‡С‚Рѕ РґР°РЅРЅС‹Рµ СЌР»РµРјРµРЅС‚С‹ РѕС‡РµРЅСЊ РїРѕРґРѕР·СЂРёС‚РµР»СЊРЅС‹, Рѕ РєРѕС‚РѕСЂС‹С… РІР°Рј СЃР»РµРґСѓРµС‚ РїРѕР·Р°Р±РѕС‚РёС‚СЊСЃСЏ!")
         print(Fore.BLUE + "-"*50 + "\n")
         count = 0
         withopen(sys.argv[1], "r", encoding="utf-8") assample:
             forlineinsample:
-                ifline.startswith("От: "):
+                ifline.startswith("РћС‚: "):
                     print(Fore.RED + line)
-                ifline.startswith("К: "):
+                ifline.startswith("Рљ: "):
                     print(Fore.YELLOW + line)   
-                ifline.startswith("Предмет: "):
+                ifline.startswith("РџСЂРµРґРјРµС‚: "):
                     print(Fore.GREEN + line)
-                ifline.startswith("Дата: "):
+                ifline.startswith("Р”Р°С‚Р°: "):
                     print(Fore.RED + line) 
-                ifline.startswith("Идентификаторсообщения: "):
+                ifline.startswith("РРґРµРЅС‚РёС„РёРєР°С‚РѕСЂСЃРѕРѕР±С‰РµРЅРёСЏ: "):
           print(Fore.GREEN + line)
-                ifline.startswith("Обратныйпуть:"):
+                ifline.startswith("РћР±СЂР°С‚РЅС‹Р№РїСѓС‚СЊ:"):
                     print(Fore.YELLOW + line)
-                ifline.startswith("Вернутьсяк:"):
+                ifline.startswith("Р’РµСЂРЅСѓС‚СЊСЃСЏРє:"):
                     print(Fore.GREEN + line)
                 ifline.startswith("List-Unsubscribe:"):
                     print(Fore.YELLOW + line)
@@ -144,10 +144,10 @@ defbaseGrabber():
                 ifline.startswith("Received: "):
                     count += 1
 
-        print("+>Общееколичествопрыжков: " + str(count) + "\n")
+        print("+>РћР±С‰РµРµРєРѕР»РёС‡РµСЃС‚РІРѕРїСЂС‹Р¶РєРѕРІ: " + str(count) + "\n")
     
   exceptException:
-        print("Что-то пошло не так в Base Grabber!")
+        print("Р§С‚Рѕ-С‚Рѕ РїРѕС€Р»Рѕ РЅРµ С‚Р°Рє РІ Base Grabber!")
         exit
 
     finally:
@@ -155,7 +155,7 @@ defbaseGrabber():
 
 defemailGrabber():
     print(Fore.BLUE + "-"*50)
-    print(Fore.BLUE + "Разделкаэлектронныхписем!")
+    print(Fore.BLUE + "Р Р°Р·РґРµР»РєР°СЌР»РµРєС‚СЂРѕРЅРЅС‹С…РїРёСЃРµРј!")
   print(Fore.BLUE + "-"*50)
 
     try:
@@ -171,7 +171,7 @@ defemailGrabber():
 
         
     except:
-        print("Что-то пошло не так в EmailGrabber!")
+        print("Р§С‚Рѕ-С‚Рѕ РїРѕС€Р»Рѕ РЅРµ С‚Р°Рє РІ EmailGrabber!")
         exit
 
     finally:
@@ -179,7 +179,7 @@ defemailGrabber():
 
 defipGrabber():
     print(Fore.BLUE + "-"*50)
-    print(Fore.BLUE + "ПечатьтолькоуникальныхIP-адресов!")
+    print(Fore.BLUE + "РџРµС‡Р°С‚СЊС‚РѕР»СЊРєРѕСѓРЅРёРєР°Р»СЊРЅС‹С…IP-Р°РґСЂРµСЃРѕРІ!")
   print(Fore.BLUE + "-"*50)
     
     try:
@@ -193,10 +193,10 @@ defipGrabber():
                 ifmatchnotinIP:
                     IP.append(match)
                     IP_COUNT += 1
-                    print("\n" + str(IP_COUNT) + Fore.YELLOW + " - Айпиадрес: " + match)
+                    print("\n" + str(IP_COUNT) + Fore.YELLOW + " - РђР№РїРёР°РґСЂРµСЃ: " + match)
     
     except:
-        print("Что-то пошло не так IP Grabber!")
+        print("Р§С‚Рѕ-С‚Рѕ РїРѕС€Р»Рѕ РЅРµ С‚Р°Рє IP Grabber!")
         exit
     
     finally:
@@ -205,7 +205,7 @@ defipGrabber():
 defurlGrabber():
     print("\n")
     print(Fore.BLUE + "-"*50)
-    print(Fore.BLUE + "Разделкавсех URL!")
+    print(Fore.BLUE + "Р Р°Р·РґРµР»РєР°РІСЃРµС… URL!")
     print(Fore.BLUE + "-"*50 + "\n")
     
     # try:
@@ -223,9 +223,9 @@ defurlGrabber():
                         print(match)
                         URL.append(match)
         ifnotURL:
-            print(Fore.GREEN + "URL-адресаненайдены!")
+            print(Fore.GREEN + "URL-Р°РґСЂРµСЃР°РЅРµРЅР°Р№РґРµРЅС‹!")
   except:
-        print("Что-то пошло не так в URL Grabber")
+        print("Р§С‚Рѕ-С‚Рѕ РїРѕС€Р»Рѕ РЅРµ С‚Р°Рє РІ URL Grabber")
     
     finally:
         xHunter()
@@ -233,7 +233,7 @@ defurlGrabber():
 defxHunter():
     print("\n")
     print(Fore.BLUE + "-"*50)
-    print(Fore.BLUE + "Печать всех заголовков, которые были добавлены во время отправки электронной почты")
+    print(Fore.BLUE + "РџРµС‡Р°С‚СЊ РІСЃРµС… Р·Р°РіРѕР»РѕРІРєРѕРІ, РєРѕС‚РѕСЂС‹Рµ Р±С‹Р»Рё РґРѕР±Р°РІР»РµРЅС‹ РІРѕ РІСЂРµРјСЏ РѕС‚РїСЂР°РІРєРё СЌР»РµРєС‚СЂРѕРЅРЅРѕР№ РїРѕС‡С‚С‹")
   print(Fore.BLUE + "-"*50 + "\n")
 
     try:
@@ -242,14 +242,14 @@ defxHunter():
                     ifline.startswith("X-"):
                         print(Fore.YELLOW + line)
     except:
-        print("Заголовков X не наблюдается")
+        print("Р—Р°РіРѕР»РѕРІРєРѕРІ X РЅРµ РЅР°Р±Р»СЋРґР°РµС‚СЃСЏ")
     
     finally:
         embedAttachments()
         
 defembedAttachments():
     print(Fore.BLUE + "-"*50)
-    print(Fore.BLUE + "Проверка наличия каких-либо вложений")
+    print(Fore.BLUE + "РџСЂРѕРІРµСЂРєР° РЅР°Р»РёС‡РёСЏ РєР°РєРёС…-Р»РёР±Рѕ РІР»РѕР¶РµРЅРёР№")
     print(Fore.BLUE + "-"*50)
 
     try:
@@ -257,12 +257,12 @@ defembedAttachments():
             attachFile = email.message_from_file(f, policy=policy.default)
             forattachmentinattachFile.iter_attachments():
                     attName = attachment.get_filename()
-                    print(Fore.GREEN + "\n[+] Файлнайденизаписанвовложениях: " + Fore.RESET + attName)
+                    print(Fore.GREEN + "\n[+] Р¤Р°Р№Р»РЅР°Р№РґРµРЅРёР·Р°РїРёСЃР°РЅРІРѕРІР»РѕР¶РµРЅРёСЏС…: " + Fore.RESET + attName)
                     withopen(os.path.join(exportedPath, attName), "wb") asfileWrite:
                             fileWrite.write(attachment.get_payload(decode=True))
 
     except:
-        print("Что-то пошло не так во встроенных вложениях")
+        print("Р§С‚Рѕ-С‚Рѕ РїРѕС€Р»Рѕ РЅРµ С‚Р°Рє РІРѕ РІСЃС‚СЂРѕРµРЅРЅС‹С… РІР»РѕР¶РµРЅРёСЏС…")
 
 defbanner():
 
@@ -277,9 +277,162 @@ defmain():
     banner()
 
     iflen(sys.argv) <2orlen(sys.argv) >2:
-        print(Fore.YELLOW + "Указано неверное количество аргументов!")
+        print(Fore.YELLOW + "РЈРєР°Р·Р°РЅРѕ РЅРµРІРµСЂРЅРѕРµ РєРѕР»РёС‡РµСЃС‚РІРѕ Р°СЂРіСѓРјРµРЅС‚РѕРІ!")
     else:
         fileChecker()
 
 if__name__ == "__main__":
     main()
+
+РџСЂРёР»РѕР¶РµРЅРёРµ:
+
+import 'dart:convert';
+
+CategoryModelcategoryModelFromJson(String str) =>
+CategoryModel.fromJson(json.decode(str));
+
+String categoryModelToJson(CategoryModel data) =>json.encode(data.toJson());
+
+class CategoryModel {
+CategoryModel({
+    required this.image,
+    required this.id,
+    required this.name,
+  });
+
+  String image;
+  String name;
+
+  String id;
+
+  factory CategoryModel.fromJson(Map<String, dynamic> json) =>CategoryModel(
+        id: json["id"],
+        image: json["image"],
+        name: json["name"],
+      );
+
+  Map<String, dynamic>toJson() => {
+        "id": id,
+        "image": image,
+        "name": name,
+      };
+}
+import 'package:qaz_mebel/models/product_model/product_model.dart';
+class OrderModel {
+OrderModel({
+    required this.totalPrice,
+    required this.orderId,
+    required this.payment,
+    required this.products,
+    required this.status,
+  });
+  String payment;
+  String status;
+  List<ProductModel> products;
+  double totalPrice;
+  String orderId;
+  factory OrderModel.fromJson(Map<String, dynamic> json) {
+    List<dynamic>productMap = json["products"];
+    return OrderModel(
+orderId: json["orderId"],
+        products: productMap.map((e) =>ProductModel.fromJson(e)).toList(),
+totalPrice: json["totalPrice"],
+        status: json["status"],
+        payment: json["payment"]);
+  }
+}
+import 'dart:convert';
+ProductModelproductModelFromJson(String str) =>
+ProductModel.fromJson(json.decode(str));
+
+String productModelToJson(ProductModel data) =>json.encode(data.toJson());
+class ProductModel {
+ProductModel({
+        required this.image,
+        required this.id,
+        required this.name,
+        required this.price,
+        required this.description,
+        required this.isFavourite,
+        required this.isSale,
+this.qty});
+  String image;
+  String id;
+  bool isFavourite;
+  bool isSale;
+  String name;
+  double price;
+  String description;
+  int? qty;
+
+  factory ProductModel.fromJson(Map<String, dynamic> json) =>ProductModel(
+        id: json["id"],
+        name: json["name"],
+        description: json["description"],
+        image: json["image"],
+isFavourite: false,
+isSale:false,
+        qty: json["qty"],
+        price: double.parse(json["price"].toString()),
+      );
+  Map<String, dynamic>toJson() => {
+        "id": id,
+        "name": name,
+        "image": image,
+        "description": description,
+        "isFavourite": isFavourite,
+    "isSale": isSale,
+        "price": price,
+        "qty": qty
+      };
+ProductModelcopyWith({
+    int? qty,
+  }) =>
+ProductModel(
+        id: id,
+        name: name,
+        description: description,
+        image: image,
+isFavourite: isFavourite,
+isSale:isSale,
+        qty: qty ?? this.qty,
+        price: price,
+      );
+}
+import 'dart:convert';
+UserModeluserModelFromJson(String str) =>UserModel.fromJson(json.decode(str));
+String userModelToJson(UserModel data) =>json.encode(data.toJson());
+class UserModel {
+UserModel({
+this.image,
+    required this.id,
+    required this.name,
+    required this.email,
+  });
+  String? image;
+  String name;
+  String email;
+  String id;
+  factory UserModel.fromJson(Map<String, dynamic> json) =>UserModel(
+        id: json["id"],
+        image: json["image"],
+        email: json["email"],
+        name: json["name"],
+      );
+  Map<String, dynamic>toJson() => {
+        "id": id,
+        "image": image,
+        "name": name,
+        "email": email,
+      };
+UserModelcopyWith({
+    String? name,
+    image,
+  }) =>
+UserModel(
+        id: id,
+        name: name ?? this.name,
+        email: email,
+        image: image ?? this.image,
+      );
+}
