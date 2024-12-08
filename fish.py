@@ -1,3 +1,69 @@
+import tkinter as tk
+from tkinter import filedialog, messagebox
+import os
+import re
+import extract_msg
+from colorama import Fore
+
+def file_checker(file_path):
+    if file_path.endswith('.msg'):
+        return msg_grabber(file_path)
+    elif file_path.endswith('.eml'):
+        return base_grabber(file_path)
+    else:
+        return f"{Fore.RED}Файл в формате: {file_path.split('.')[-1]}"
+
+def msg_grabber(file):
+    result = ""
+    try:
+        with extract_msg.openMsg(file) as messageFile:
+            result += f"{Fore.CYAN}[+] Имя файла: {file}\\n"
+            result += f"{Fore.GREEN}[+] От: {messageFile.sender}\\n"
+            result += f"{Fore.GREEN}[+] К: {messageFile.to}\\n"
+            result += f"{Fore.GREEN}[+] Предмет: {messageFile.subject}\\n"
+            if messageFile.attachments:
+                result += f"{Fore.GREEN}[+] Найдены вложения!\\n"
+            else:
+                result += f"{Fore.GREEN}[+] Вложений не наблюдается\\n"
+            messageBody = str(messageFile.body)
+            result += f"{Fore.GREEN}[+] Электронная почта:\\n{Fore.YELLOW}{messageBody}"
+    except Exception as e:
+        result = f"Ошибка при обработке файла: {str(e)}"
+    return result
+
+def base_grabber(file):
+    result = ""
+    try:
+        with open(file, "r", encoding="utf-8") as sample:
+            for line in sample:
+                if line.startswith("От: "):
+                    result += f"{Fore.RED}{line}"
+                elif line.startswith("К: "):
+                    result += f"{Fore.YELLOW}{line}"
+                elif line.startswith("Предмет: "):
+                    result += f"{Fore.GREEN}{line}"
+                elif line.startswith("Дата: "):
+                    result += f"{Fore.RED}{line}"
+    except Exception as e:
+        result = f"Ошибка при обработке файла: {str(e)}"
+    return result
+
+def upload_email():
+    file_path = filedialog.askopenfilename(title="Выберите файл", filetypes=(("MSG files", "*.msg"), ("EML files", "*.eml")))
+    if file_path:
+        result = file_checker(file_path)
+        messagebox.showinfo("Результаты проверки", result)
+
+# Создаем главное окно
+root = tk.Tk()
+root.title("Проверка электронных писем")
+
+# Добавляем кнопку
+upload_button = tk.Button(root, text="Загрузить письмо", command=upload_email)
+upload_button.pack(pady=20)
+
+root.mainloop()
+
 importemail
 fromemailimportpolicy
 fromgenericpathimportexists
